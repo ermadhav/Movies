@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movies</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="design.css" />
+</head>
+
+<body>
+    <h1 id="searchTitle" class="text-center mt-5">
+        Search Results > <span><%= searchQuery.toUpperCase() %></span>
+    </h1>
+
+    <% if (data.length > 0) { %>
+        <% data.forEach(function(movie) { %>
+            <div class="card w-75 mb-5 mx-auto">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="<%= movie.Poster !== 'N/A' ? movie.Poster : 'https://via.placeholder.com/300x450?text=No+Image+Available' %>"
+                             alt="<%= movie.Title %>"
+                             class="img-fluid card-img" />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= movie.Title %> (<%= movie.Year %>)</h2>
+                            <p class="card-text"><b>Released:</b> <%= movie.Released %></p>
+                            <p class="card-text"><b>Runtime:</b> <%= movie.Runtime %></p>
+                            <p class="card-text"><b>Genre:</b> <%= movie.Genre %></p>
+                            <p class="card-text"><b>Director:</b> <%= movie.Director %></p>
+                            <p class="card-text"><b>Writer:</b> <%= movie.Writer %></p>
+                            <p class="card-text"><b>Actors:</b> <%= movie.Actors %></p>
+                            <p class="card-text"><b>Plot:</b> <%= movie.Plot %></p>
+                            <p class="card-text"><b>Language:</b> <%= movie.Language %></p>
+                            <p class="card-text"><b>IMDB Rating:</b> <%= movie.imdbRating %></p>
+                            <p class="card-text"><b>Votes:</b> <%= movie.imdbVotes %></p>
+                            <p class="card-text"><b>Awards:</b> <%= movie.Awards %></p>
+                            <p class="card-text"><b>Box Office:</b> <%= movie.BoxOffice %></p>
+                            <a href="https://www.imdb.com/title/<%= movie.imdbID %>" target="_blank" class="btn btn-primary">View on IMDB</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <div class="alert alert-danger text-center" role="alert">
+            No results found for "<%= searchQuery %>". <%= errorMessage ? errorMessage : '' %>
+        </div>
+    <% } %>
+</body>
+
+</html>
